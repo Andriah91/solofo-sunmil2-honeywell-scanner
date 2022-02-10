@@ -1,0 +1,68 @@
+{
+  "api": {
+    "name": "ScannerLaserPlugin",
+    "slug": "scannerlaserplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'ScannerLaserListner', listenerFunc: ScanChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'ScannerLaserListner'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "ScanChangeListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "ScanChangeListener"
+        ],
+        "slug": "addlistenerscannerlaserlistner"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "ScanChangeListener",
+      "slug": "scanchangelistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(resultScan: any): void",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}
