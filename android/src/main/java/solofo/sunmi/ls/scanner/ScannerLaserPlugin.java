@@ -10,8 +10,16 @@ import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import com.honeywell.aidc.*;
+
 @CapacitorPlugin(name = "ScannerLaser")
-public class ScannerLaserPlugin extends Plugin {
+public class ScannerLaserPlugin extends Plugin implements
+        BarcodeReader.BarcodeListener, BarcodeReader.TriggerListener{
+
+    private com.honeywell.aidc.AidcManager mAidcManager;
+    private com.honeywell.aidc.BarcodeReader mBarcodeReader;
+    private String mConnectedScanner = null;
+    private boolean mResume = false;
 
     private final BroadcastReceiver QRCODE_SUNMI = new BroadcastReceiver() {
         @Override
@@ -20,6 +28,31 @@ public class ScannerLaserPlugin extends Plugin {
             notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
         }
     };
+
+    @Override
+    public void onBarcodeEvent(final BarcodeReadEvent event) {
+        System.out.println("Barcode data: " + event.getBarcodeData());
+        System.out.println("Character Set: " + event.getCharset());
+        System.out.println("Code ID: " + event.getCodeId());
+        System.out.println("AIM ID: " + event.getAimId());
+        System.out.println("Timestamp: " + event.getTimestamp());
+        String QRData = event.getBarcodeData();
+        notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
+    }
+
+    // When using Automatic Trigger control do not need to implement the
+    // onTriggerEvent function
+    @Override
+    public void onTriggerEvent(TriggerStateChangeEvent event) {
+        // TODO Auto-generated method stub
+        System.out.println("onTriggerEvent: " + event.getState());
+    }
+
+    @Override
+    public void onFailureEvent(BarcodeFailureEvent arg0) {
+        // TODO Auto-generated method stub
+        System.out.println("onFailureEvent: " + arg0.toString());
+    }
 
     @Override
     public void load() {
