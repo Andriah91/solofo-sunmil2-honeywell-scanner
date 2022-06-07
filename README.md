@@ -14,6 +14,7 @@ npx cap sync
 <docgen-index>
 
 * [`addListener('ScannerLaserListner', ...)`](#addlistenerscannerlaserlistner)
+* [`scan()`](#scan)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -34,6 +35,15 @@ addListener(eventName: 'ScannerLaserListner', listenerFunc: ScanChangeListener) 
 | **`listenerFunc`** | <code><a href="#scanchangelistener">ScanChangeListener</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+
+--------------------
+
+
+### scan()
+
+```typescript
+scan() => void
+```
 
 --------------------
 

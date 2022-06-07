@@ -14,39 +14,43 @@ import com.honeywell.aidc.*;
 
 @CapacitorPlugin(name = "ScannerLaser")
 public class ScannerLaserPlugin extends Plugin implements
-        BarcodeReader.BarcodeListener, BarcodeReader.TriggerListener{
+        BarcodeReader.BarcodeListener{
 
-    private com.honeywell.aidc.AidcManager mAidcManager;
-    private com.honeywell.aidc.BarcodeReader mBarcodeReader;
-    private String mConnectedScanner = null;
-    private boolean mResume = false;
+    private com.honeywell.aidc.AidcManager manager;
+    private com.honeywell.aidc.BarcodeReader barcodeReader;
 
     private final BroadcastReceiver QRCODE_SUNMI = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String QRData = intent.getStringExtra("data");
-            notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
+            //notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
         }
     };
 
-    @Override
-    public void onBarcodeEvent(final BarcodeReadEvent event) {
-        System.out.println("Barcode data: " + event.getBarcodeData());
-        System.out.println("Character Set: " + event.getCharset());
-        System.out.println("Code ID: " + event.getCodeId());
-        System.out.println("AIM ID: " + event.getAimId());
-        System.out.println("Timestamp: " + event.getTimestamp());
-        String QRData = event.getBarcodeData();
-        notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
+    @PluginMethod()
+    public void scan(PluginCall call) {
+        if (barcodeReader != null) {
+            try {
+               barcodeReader.softwareTrigger(false);
+            } catch (ScannerNotClaimedException e) {
+                e.printStackTrace();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    // When using Automatic Trigger control do not need to implement the
-    // onTriggerEvent function
     @Override
-    public void onTriggerEvent(TriggerStateChangeEvent event) {
-        // TODO Auto-generated method stub
-        System.out.println("onTriggerEvent: " + event.getState());
+    public void onBarcodeEvent(BarcodeReadEvent event) {
+      System.out.println("Barcode data: " + event.getBarcodeData());
+      System.out.println("Character Set: " + event.getCharset());
+      System.out.println("Code ID: " + event.getCodeId());
+      System.out.println("AIM ID: " + event.getAimId());
+      System.out.println("Timestamp: " + event.getTimestamp());
+      String QRData = event.getBarcodeData();
+      notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
     }
+
 
     @Override
     public void onFailureEvent(BarcodeFailureEvent arg0) {
@@ -56,7 +60,25 @@ public class ScannerLaserPlugin extends Plugin implements
 
     @Override
     public void load() {
+        System.out.println("Registry plugin ScannerLaserPlugin");
         super.load();
+
+        Context context = getContext().getApplicationContext();
+        AidcManager.create(context, new AidcManager.CreatedCallback() {
+          @Override
+          public void onCreated(AidcManager aidcManager) {
+            manager = aidcManager;
+            barcodeReader = manager.createBarcodeReader();
+            if (barcodeReader != null) {
+              barcodeReader.addBarcodeListener(ScannerLaserPlugin.this);
+              try {
+                barcodeReader.claim();
+              } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+              }
+            }
+          }
+        });
 
         try {
             getContext().unregisterReceiver(QRCODE_SUNMI);

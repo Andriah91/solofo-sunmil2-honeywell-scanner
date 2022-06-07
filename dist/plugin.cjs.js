@@ -9,6 +9,9 @@ const ScannerLaser = core.registerPlugin('ScannerLaser', {
 });
 
 class ScannerLaserWeb extends core.WebPlugin {
+    scan() {
+        throw new Error('Method not implemented.');
+    }
 }
 
 var web = /*#__PURE__*/Object.freeze({

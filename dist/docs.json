@@ -28,6 +28,16 @@
           "ScanChangeListener"
         ],
         "slug": "addlistenerscannerlaserlistner"
+      },
+      {
+        "name": "scan",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "scan"
       }
     ],
     "properties": []

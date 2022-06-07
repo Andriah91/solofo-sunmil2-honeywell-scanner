@@ -6,6 +6,9 @@ var capacitorScannerLaser = (function (exports, core) {
     });
 
     class ScannerLaserWeb extends core.WebPlugin {
+        scan() {
+            throw new Error('Method not implemented.');
+        }
     }
 
     var web = /*#__PURE__*/Object.freeze({
