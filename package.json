@@ -1,6 +1,6 @@
 {
   "name": "solofo-sunmil2-scanner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "SunmiL2 laser scanner",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -10,6 +10,7 @@
     "android/src/main/",
     "android/build.gradle",
     "dist/",
+    "libs/",
     "SolofoSunmil2Scanner.podspec"
   ],
   "author": "Solofo Andriamampihantona",

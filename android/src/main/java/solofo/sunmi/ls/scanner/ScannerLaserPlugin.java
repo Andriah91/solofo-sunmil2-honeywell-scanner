@@ -32,6 +32,15 @@ public class ScannerLaserPlugin extends Plugin {
       }
     };
 
+    private final BroadcastReceiver QRCODE_HONEYWELL = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+          String QRData = intent.getStringExtra("data");
+          System.out.println(QRData);
+          notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
+        }
+      };
+
     private final BroadcastReceiver MODE_SUNMI = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
@@ -75,10 +84,13 @@ public class ScannerLaserPlugin extends Plugin {
       });
 
         try {
+            getContext().unregisterReceiver(QRCODE_HONEYWELL);
             getContext().unregisterReceiver(QRCODE_SUNMI);
+            getContext().unregisterReceiver(MODE_SUNMI);
         } catch (Exception ignored) {
         }
-      getContext().registerReceiver(QRCODE_SUNMI, new IntentFilter("solofo.barcode"));
+      getContext().registerReceiver(QRCODE_HONEYWELL, new IntentFilter("solofo.barcode"));
+      getContext().registerReceiver(QRCODE_SUNMI, new IntentFilter("com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED"));
       getContext().registerReceiver(MODE_SUNMI, new IntentFilter("solofo.raffale.mode"));
     }
 
