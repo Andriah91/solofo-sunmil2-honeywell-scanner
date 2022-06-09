@@ -30,6 +30,30 @@
         "slug": "addlistenerscannerlaserlistner"
       },
       {
+        "name": "addListener",
+        "signature": "(eventName: 'ModeRaffaleListner', listenerFunc: ScanChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'ModeRaffaleListner'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "ScanChangeListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "ScanChangeListener"
+        ],
+        "slug": "addlistenermoderaffalelistner"
+      },
+      {
         "name": "scan",
         "signature": "() => void",
         "parameters": [],

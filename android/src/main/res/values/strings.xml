@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="barcode">barcode</string>
+  <string name="commencer_votre_scan">Commencer votre scan</string>
+  <string name="mode_raffale">Mode raffale off</string>
+</resources>

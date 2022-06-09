@@ -1,3 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="solofo.sunmi.ls.scanner">
+
+  <application android:allowBackup="true"  android:label="@string/app_name">
+    <activity android:label="@string/barcode" android:name="solofo.sunmi.ls.scanner.ClientBarcodeActivity" android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="android.intent.action.CLIENTACTIVITY"/>
+
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+  </application>
 </manifest>

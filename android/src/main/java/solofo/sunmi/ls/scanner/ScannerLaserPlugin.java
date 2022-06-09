@@ -1,74 +1,55 @@
 package solofo.sunmi.ls.scanner;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.widget.Toast;
+
+import androidx.annotation.MainThread;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
+import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import com.honeywell.aidc.*;
 
 @CapacitorPlugin(name = "ScannerLaser")
-public class ScannerLaserPlugin extends Plugin implements
-        BarcodeReader.BarcodeListener{
+public class ScannerLaserPlugin extends Plugin {
 
-    private com.honeywell.aidc.AidcManager manager;
-    private com.honeywell.aidc.BarcodeReader barcodeReader;
+    private static BarcodeReader barcodeReader;
+    private AidcManager manager;
 
     private final BroadcastReceiver QRCODE_SUNMI = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String QRData = intent.getStringExtra("data");
-            //notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
-        }
+      @Override
+      public void onReceive(Context context, Intent intent) {
+        String QRData = intent.getStringExtra("data");
+        System.out.println(QRData);
+        notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
+      }
+    };
+
+    private final BroadcastReceiver MODE_SUNMI = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+        Integer data = intent.getIntExtra("data", 0);
+        System.out.println(data);
+        notifyListeners("ModeRaffaleListner", new JSObject().put("result", data), true);
+      }
     };
 
     @PluginMethod()
     public void scan(PluginCall call) {
-        if (barcodeReader != null) {
-            try {
-               barcodeReader.softwareTrigger(false);
-            } catch (ScannerNotClaimedException e) {
-                e.printStackTrace();
-            } catch (ScannerUnavailableException e) {
-                e.printStackTrace();
-            }
-        }
+      Intent barcodeIntent = new Intent("android.intent.action.CLIENTACTIVITY");
+      getActivity().startActivity(barcodeIntent);
     }
 
     @PluginMethod()
     public void stop(PluginCall call) {
-        if (barcodeReader != null) {
-            try {
-               barcodeReader.softwareTrigger(false);
-            } catch (ScannerNotClaimedException e) {
-                e.printStackTrace();
-            } catch (ScannerUnavailableException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
-    @Override
-    public void onBarcodeEvent(final BarcodeReadEvent event) {
-      System.out.println("Barcode data: " + event.getBarcodeData());
-      System.out.println("Character Set: " + event.getCharset());
-      System.out.println("Code ID: " + event.getCodeId());
-      System.out.println("AIM ID: " + event.getAimId());
-      System.out.println("Timestamp: " + event.getTimestamp());
-      String QRData = event.getBarcodeData();
-      notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
-    }
-
-
-    @Override
-    public void onFailureEvent(BarcodeFailureEvent arg0) {
-        // TODO Auto-generated method stub
-        System.out.println("onFailureEvent: " + arg0.toString());
     }
 
     @Override
@@ -76,27 +57,32 @@ public class ScannerLaserPlugin extends Plugin implements
         System.out.println("Registry plugin ScannerLaserPlugin");
         super.load();
 
-        Context context = getContext().getApplicationContext();
-        AidcManager.create(context, new AidcManager.CreatedCallback() {
-          @Override
-          public void onCreated(AidcManager aidcManager) {
-            manager = aidcManager;
+        AidcManager.create(getContext(), new AidcManager.CreatedCallback() {
+
+        @Override
+        public void onCreated(AidcManager aidcManager) {
+          manager = aidcManager;
+          try{
             barcodeReader = manager.createBarcodeReader();
-            if (barcodeReader != null) {
-              barcodeReader.addBarcodeListener(ScannerLaserPlugin.this);
-              try {
-                barcodeReader.claim();
-              } catch (ScannerUnavailableException e) {
-                e.printStackTrace();
-              }
-            }
           }
-        });
+          catch (InvalidScannerNameException e){
+            Toast.makeText(getContext(), "Invalid Scanner Name Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+          }
+          catch (Exception e){
+            Toast.makeText(getContext(), "Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+          }
+        }
+      });
 
         try {
             getContext().unregisterReceiver(QRCODE_SUNMI);
         } catch (Exception ignored) {
         }
-        getContext().registerReceiver(QRCODE_SUNMI, new IntentFilter("com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED"));
+      getContext().registerReceiver(QRCODE_SUNMI, new IntentFilter("solofo.barcode"));
+      getContext().registerReceiver(MODE_SUNMI, new IntentFilter("solofo.raffale.mode"));
     }
+
+    static BarcodeReader getBarcodeObject() {
+    return barcodeReader;
+  }
 }
