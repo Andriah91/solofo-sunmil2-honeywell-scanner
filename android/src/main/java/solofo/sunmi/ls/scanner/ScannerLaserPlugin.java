@@ -40,8 +40,21 @@ public class ScannerLaserPlugin extends Plugin implements
         }
     }
 
+    @PluginMethod()
+    public void stop(PluginCall call) {
+        if (barcodeReader != null) {
+            try {
+               barcodeReader.softwareTrigger(false);
+            } catch (ScannerNotClaimedException e) {
+                e.printStackTrace();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
-    public void onBarcodeEvent(BarcodeReadEvent event) {
+    public void onBarcodeEvent(final BarcodeReadEvent event) {
       System.out.println("Barcode data: " + event.getBarcodeData());
       System.out.println("Character Set: " + event.getCharset());
       System.out.println("Code ID: " + event.getCodeId());

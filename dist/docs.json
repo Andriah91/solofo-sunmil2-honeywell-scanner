@@ -38,6 +38,16 @@
         "docs": "",
         "complexTypes": [],
         "slug": "scan"
+      },
+      {
+        "name": "stop",
+        "signature": "() => void",
+        "parameters": [],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "stop"
       }
     ],
     "properties": []

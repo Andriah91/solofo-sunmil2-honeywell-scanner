@@ -15,6 +15,7 @@ npx cap sync
 
 * [`addListener('ScannerLaserListner', ...)`](#addlistenerscannerlaserlistner)
 * [`scan()`](#scan)
+* [`stop()`](#stop)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -43,6 +44,15 @@ addListener(eventName: 'ScannerLaserListner', listenerFunc: ScanChangeListener) 
 
 ```typescript
 scan() => void
+```
+
+--------------------
+
+
+### stop()
+
+```typescript
+stop() => void
 ```
 
 --------------------
