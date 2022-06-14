@@ -15,6 +15,7 @@ npx cap sync
 
 * [`addListener('ScannerLaserListner', ...)`](#addlistenerscannerlaserlistner)
 * [`addListener('ModeRaffaleListner', ...)`](#addlistenermoderaffalelistner)
+* [`addListener('OnDestroyListner', ...)`](#addlistenerondestroylistner)
 * [`scan()`](#scan)
 * [`stop()`](#stop)
 * [Interfaces](#interfaces)
@@ -50,6 +51,22 @@ addListener(eventName: 'ModeRaffaleListner', listenerFunc: ScanChangeListener) =
 | Param              | Type                                                              |
 | ------------------ | ----------------------------------------------------------------- |
 | **`eventName`**    | <code>'ModeRaffaleListner'</code>                                 |
+| **`listenerFunc`** | <code><a href="#scanchangelistener">ScanChangeListener</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+
+--------------------
+
+
+### addListener('OnDestroyListner', ...)
+
+```typescript
+addListener(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+```
+
+| Param              | Type                                                              |
+| ------------------ | ----------------------------------------------------------------- |
+| **`eventName`**    | <code>'OnDestroyListner'</code>                                   |
 | **`listenerFunc`** | <code><a href="#scanchangelistener">ScanChangeListener</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>

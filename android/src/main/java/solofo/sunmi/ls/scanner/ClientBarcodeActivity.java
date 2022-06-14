@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
 
       Map<String, Object> properties = new HashMap<String, Object>();
       // Set Symbologies On/Off
+      properties.put(BarcodeReader.PROPERTY_EAN_13_CHECK_DIGIT_TRANSMIT_ENABLED, true);
       properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, false);
       properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, false);
       properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
@@ -64,7 +66,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
       properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
       properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
       // Set Max Code 39 barcode length
-      properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+      properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 39);
       // Turn on center decoding
       properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
       // Disable bad read response, handle in onFailureEvent
@@ -96,12 +98,23 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
         sendBroadcast(new Intent("solofo.raffale.mode").putExtra("data", mode ? 1 : 0));
       }
     });
+
+    Button btncancel = (Button) findViewById(R.id.cancel);
+
+    btncancel.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        sendBroadcast(new Intent("solofo.destroy").putExtra("data", code));
+        finish();
+      }
+    });
   }
 
 
   @Override
   public void onBarcodeEvent(final BarcodeReadEvent event) {
-    sendBroadcast(new Intent("solofo.barcode").putExtra("data", event.getBarcodeData()));
+    String code = event.getBarcodeData();
+    sendBroadcast(new Intent("solofo.barcode").putExtra("data", code));
     finish();
   }
 

@@ -2,14 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
+  android:layout_width="wrap_content"
   android:layout_height="match_parent"
-  android:padding="16dp"
-  android:orientation="vertical">
+  android:orientation="vertical"
+  android:padding="16dp">
 
-  <Button
-    android:id="@+id/raffale"
-    android:layout_width="match_parent"
-    android:layout_height="62dp"
-    android:text="@string/mode_raffale" />
+  <LinearLayout
+    android:layout_width="377dp"
+    android:layout_height="666dp"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="45dp"
+    android:layout_weight="1"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <Button
+      android:id="@+id/raffale"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|top|center_vertical"
+      android:gravity="center_horizontal|top|center_vertical"
+      android:text="@string/mode_raffale" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="392dp"
+    android:layout_height="475dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="117dp"
+    android:layout_marginBottom="123dp"
+    android:layout_weight="1"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="304dp"
+      android:layout_height="match_parent"
+      app:srcCompat="@android:drawable/gallery_thumb" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="380dp"
+    android:layout_height="670dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="45dp"
+    android:layout_weight="1"
+    android:gravity="center|bottom"
+    android:orientation="vertical">
+
+    <Button
+      android:id="@+id/cancel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|bottom"
+      android:text="@string/cancel" />
+  </LinearLayout>
 </RelativeLayout>

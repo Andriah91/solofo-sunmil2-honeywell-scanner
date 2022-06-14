@@ -27,7 +27,6 @@ public class ScannerLaserPlugin extends Plugin {
       @Override
       public void onReceive(Context context, Intent intent) {
         String QRData = intent.getStringExtra("data");
-        System.out.println(QRData);
         notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
       }
     };
@@ -36,7 +35,6 @@ public class ScannerLaserPlugin extends Plugin {
         @Override
         public void onReceive(Context context, Intent intent) {
           String QRData = intent.getStringExtra("data");
-          System.out.println(QRData);
           notifyListeners("ScannerLaserListner", new JSObject().put("result", QRData), true);
         }
       };
@@ -45,8 +43,14 @@ public class ScannerLaserPlugin extends Plugin {
       @Override
       public void onReceive(Context context, Intent intent) {
         Integer data = intent.getIntExtra("data", 0);
-        System.out.println(data);
         notifyListeners("ModeRaffaleListner", new JSObject().put("result", data), true);
+      }
+    };
+
+    private final BroadcastReceiver destroyWindow = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+        notifyListeners("OnDestroyListner",new JSObject().put("result", null), true);
       }
     };
 
@@ -87,11 +91,13 @@ public class ScannerLaserPlugin extends Plugin {
             getContext().unregisterReceiver(QRCODE_HONEYWELL);
             getContext().unregisterReceiver(QRCODE_SUNMI);
             getContext().unregisterReceiver(MODE_SUNMI);
+            getContext().unregisterReceiver(destroyWindow);
         } catch (Exception ignored) {
         }
       getContext().registerReceiver(QRCODE_HONEYWELL, new IntentFilter("solofo.barcode"));
       getContext().registerReceiver(QRCODE_SUNMI, new IntentFilter("com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED"));
       getContext().registerReceiver(MODE_SUNMI, new IntentFilter("solofo.raffale.mode"));
+      getContext().registerReceiver(destroyWindow, new IntentFilter("solofo.destroy"));
     }
 
     static BarcodeReader getBarcodeObject() {

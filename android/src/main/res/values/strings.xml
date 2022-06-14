@@ -3,4 +3,5 @@
   <string name="barcode">barcode</string>
   <string name="commencer_votre_scan">Commencer votre scan</string>
   <string name="mode_raffale">Mode raffale off</string>
+  <string name="cancel">Annuler</string>
 </resources>

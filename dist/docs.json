@@ -54,6 +54,30 @@
         "slug": "addlistenermoderaffalelistner"
       },
       {
+        "name": "addListener",
+        "signature": "(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'OnDestroyListner'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "ScanChangeListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "ScanChangeListener"
+        ],
+        "slug": "addlistenerondestroylistner"
+      },
+      {
         "name": "scan",
         "signature": "() => void",
         "parameters": [],
