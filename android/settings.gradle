@@ -1,2 +1,2 @@
-include ':capacitor-android'
+include ':capacitor-android', ':DataCollection'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')

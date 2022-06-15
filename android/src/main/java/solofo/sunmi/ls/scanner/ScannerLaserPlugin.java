@@ -1,13 +1,11 @@
 package solofo.sunmi.ls.scanner;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.Toast;
 
-import androidx.annotation.MainThread;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;

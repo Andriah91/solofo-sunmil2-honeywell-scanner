@@ -1,24 +1,16 @@
 package solofo.sunmi.ls.scanner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.getcapacitor.JSObject;
 import com.honeywell.aidc.*;
 
 public class ClientBarcodeActivity extends Activity implements BarcodeReader.BarcodeListener,
@@ -104,7 +96,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
     btncancel.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        sendBroadcast(new Intent("solofo.destroy").putExtra("data", code));
+        sendBroadcast(new Intent("solofo.destroy"));
         finish();
       }
     });
@@ -115,7 +107,18 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
   public void onBarcodeEvent(final BarcodeReadEvent event) {
     String code = event.getBarcodeData();
     sendBroadcast(new Intent("solofo.barcode").putExtra("data", code));
-    finish();
+
+    if(!mode) {
+      finish();
+    }else{
+      runOnUiThread(new Runnable() {
+
+        @Override
+        public void run() {
+          Toast.makeText(ClientBarcodeActivity.this, "1 quantité ajoutée: "+code, Toast.LENGTH_SHORT).show();
+        }
+      });
+    }
   }
 
   // When using Automatic Trigger control do not need to implement the
