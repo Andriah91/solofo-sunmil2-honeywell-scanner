@@ -77,12 +77,12 @@ addListener(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener) => 
 ### scan(...)
 
 ```typescript
-scan(raffaleMode: boolean) => void
+scan(option: any) => void
 ```
 
-| Param             | Type                 |
-| ----------------- | -------------------- |
-| **`raffaleMode`** | <code>boolean</code> |
+| Param        | Type             |
+| ------------ | ---------------- |
+| **`option`** | <code>any</code> |
 
 --------------------
 

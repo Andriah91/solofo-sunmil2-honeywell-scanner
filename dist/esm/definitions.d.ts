@@ -4,6 +4,6 @@ export interface ScannerLaserPlugin {
     addListener(eventName: 'ScannerLaserListner', listenerFunc: ScanChangeListener): Promise<PluginListenerHandle> & PluginListenerHandle;
     addListener(eventName: 'ModeRaffaleListner', listenerFunc: ScanChangeListener): Promise<PluginListenerHandle> & PluginListenerHandle;
     addListener(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener): Promise<PluginListenerHandle> & PluginListenerHandle;
-    scan(raffaleMode: boolean): void;
+    scan(option: any): void;
     stop(): void;
 }

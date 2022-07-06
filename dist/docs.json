@@ -79,12 +79,12 @@
       },
       {
         "name": "scan",
-        "signature": "(raffaleMode: boolean) => void",
+        "signature": "(option: any) => void",
         "parameters": [
           {
-            "name": "raffaleMode",
+            "name": "option",
             "docs": "",
-            "type": "boolean"
+            "type": "any"
           }
         ],
         "returns": "void",
