@@ -53,8 +53,9 @@ public class ScannerLaserPlugin extends Plugin {
     };
 
     @PluginMethod()
-    public void scan(PluginCall call) {
+    public void scan(PluginCall call, int raffaleMode) {
       Intent barcodeIntent = new Intent("android.intent.action.CLIENTACTIVITY");
+      barcodeIntent.putExtra("mode", raffaleMode);
       getActivity().startActivity(barcodeIntent);
     }
 

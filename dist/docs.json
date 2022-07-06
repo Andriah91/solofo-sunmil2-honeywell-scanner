@@ -79,8 +79,14 @@
       },
       {
         "name": "scan",
-        "signature": "() => void",
-        "parameters": [],
+        "signature": "(raffaleMode: boolean) => void",
+        "parameters": [
+          {
+            "name": "raffaleMode",
+            "docs": "",
+            "type": "boolean"
+          }
+        ],
         "returns": "void",
         "tags": [],
         "docs": "",

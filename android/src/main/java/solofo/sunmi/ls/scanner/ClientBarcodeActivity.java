@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -76,7 +77,18 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
   @SuppressLint("ResourceAsColor")
   private void btnRaffaleSetting(){
     Button btnRaffale = (Button) findViewById(R.id.raffale);
-    btnRaffale.setText("Mode raffale off");
+    Bundle b = getIntent().getExtras();
+    int _mode = b.getInt("mode");
+    System.out.println(_mode);
+    if(_mode == 1)
+      mode = true;
+    else
+      mode = false;
+    if(!mode){
+      btnRaffale.setText("Mode raffale off");
+    }else{
+      btnRaffale.setText("Mode raffale on");
+    }
 
     btnRaffale.setOnClickListener(new View.OnClickListener() {
       @Override
