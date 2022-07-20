@@ -17,6 +17,7 @@ npx cap sync
 * [`addListener('ModeRaffaleListner', ...)`](#addlistenermoderaffalelistner)
 * [`addListener('OnDestroyListner', ...)`](#addlistenerondestroylistner)
 * [`scan(...)`](#scan)
+* [`notifier(...)`](#notifier)
 * [`stop()`](#stop)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
@@ -78,6 +79,19 @@ addListener(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener) => 
 
 ```typescript
 scan(option: any) => void
+```
+
+| Param        | Type             |
+| ------------ | ---------------- |
+| **`option`** | <code>any</code> |
+
+--------------------
+
+
+### notifier(...)
+
+```typescript
+notifier(option: any) => void
 ```
 
 | Param        | Type             |

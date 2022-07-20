@@ -9,6 +9,9 @@ const ScannerLaser = core.registerPlugin('ScannerLaser', {
 });
 
 class ScannerLaserWeb extends core.WebPlugin {
+    notifier() {
+        throw new Error('Method not implemented.');
+    }
     stop() {
         throw new Error('Method not implemented.');
     }

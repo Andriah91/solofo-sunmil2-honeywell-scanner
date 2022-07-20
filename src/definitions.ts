@@ -6,5 +6,6 @@ export interface ScannerLaserPlugin {
   addListener(eventName: 'ModeRaffaleListner', listenerFunc: ScanChangeListener): Promise<PluginListenerHandle> & PluginListenerHandle;
   addListener(eventName: 'OnDestroyListner', listenerFunc: ScanChangeListener): Promise<PluginListenerHandle> & PluginListenerHandle;
   scan(option: any):void;
+  notifier(option: any): void;
   stop():void;
 }

@@ -94,6 +94,22 @@
         "slug": "scan"
       },
       {
+        "name": "notifier",
+        "signature": "(option: any) => void",
+        "parameters": [
+          {
+            "name": "option",
+            "docs": "",
+            "type": "any"
+          }
+        ],
+        "returns": "void",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "notifier"
+      },
+      {
         "name": "stop",
         "signature": "() => void",
         "parameters": [],

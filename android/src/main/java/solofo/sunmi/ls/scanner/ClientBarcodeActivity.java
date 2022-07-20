@@ -119,18 +119,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
   public void onBarcodeEvent(final BarcodeReadEvent event) {
     String code = event.getBarcodeData();
     sendBroadcast(new Intent("solofo.barcode").putExtra("data", code));
-
-    if(!mode) {
-      finish();
-    }else{
-      runOnUiThread(new Runnable() {
-
-        @Override
-        public void run() {
-          Toast.makeText(ClientBarcodeActivity.this, "1 quantité ajoutée: "+code, Toast.LENGTH_SHORT).show();
-        }
-      });
-    }
+    finish();
   }
 
   // When using Automatic Trigger control do not need to implement the
