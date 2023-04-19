@@ -69,7 +69,7 @@ public class ScannerLaserPlugin extends Plugin {
   public void notifier(PluginCall call) {
     final String msg = call.getString("msg");
     final String color = call.getString("color");
-    Toast.makeText(getActivity(), Html.fromHtml("<font color='"+color+"' ><b>" + msg + "</b></font>"), Toast.LENGTH_SHORT).show();
+    Toast.makeText(getActivity(), Html.fromHtml("<font size='24px' color='"+color+"' ><b>" + msg + "</b></font>"), Toast.LENGTH_LONG).show();
   }
 
   @PluginMethod()

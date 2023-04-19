@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.honeywell.aidc.*;
 
 public class ClientBarcodeActivity extends Activity implements BarcodeReader.BarcodeListener,
-  BarcodeReader.TriggerListener {
+        BarcodeReader.TriggerListener {
 
   private com.honeywell.aidc.BarcodeReader barcodeReader;
   private Boolean mode = false;
@@ -37,7 +37,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
       // set the trigger mode to client control
       try {
         barcodeReader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
-          BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
+                BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
       } catch (UnsupportedPropertyException e) {
         Toast.makeText(this, "Failed to apply properties", Toast.LENGTH_SHORT).show();
       }
@@ -148,7 +148,7 @@ public class ClientBarcodeActivity extends Activity implements BarcodeReader.Bar
 
       @Override
       public void run() {
-        Toast.makeText(ClientBarcodeActivity.this, "No data", Toast.LENGTH_SHORT).show();
+        Toast.makeText(solofo.sunmi.ls.scanner.ClientBarcodeActivity.this, "No data", Toast.LENGTH_SHORT).show();
       }
     });
   }
