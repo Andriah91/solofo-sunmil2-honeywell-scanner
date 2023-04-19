@@ -1,6 +1,6 @@
 {
   "name": "solofo-sunmil2-scanner",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "SunmiL2 laser scanner",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -42,9 +42,9 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@capacitor/android": "^3.0.0",
-    "@capacitor/core": "^3.0.0",
-    "@capacitor/docgen": "^0.0.18",
+    "@capacitor/android": "^4.7.3",
+    "@capacitor/core": "^4.7.3",
+    "@capacitor/docgen": "^0.2.1",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^1.0.1",
     "eslint": "^7.11.0",
